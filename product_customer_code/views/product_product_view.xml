@@ -8,14 +8,16 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='general_information']" position="after">
                 <page string="Customer Code" name="customer_code">
-                     <field name="product_customer_codes" nolabel="1" colspan="4" widget="one2many_list">
+                     <field name="product_customer_codes" nolabel="1">
                         <tree string="Product Customer Code" editable="bottom">
                             <field name="product_code"/>
                             <field name="partner"/>
                         </tree>
                         <form string="Product Customer Code">
-                            <field name="product_code"/>
-                            <field name="partner"/>
+                            <group>
+                                <field name="product_code"/>
+                                <field name="partner"/>
+                            </group>
                         </form>
                     </field>
                 </page>
