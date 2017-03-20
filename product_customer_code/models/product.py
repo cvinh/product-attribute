@@ -32,7 +32,7 @@ class ProductProduct(models.Model):
                 product_customer_code_obj = self.env['product.customer.code']
                 product_codes = product_customer_code_obj.search([
                     ('product_code', '=', name),
-                    ('partner_id', '=', partner_id)
+                    ('partner', '=', partner_id)
                 ], limit=limit)
                 return product_codes.name_get()
         return res
