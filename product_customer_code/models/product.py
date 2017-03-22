@@ -36,3 +36,24 @@ class ProductProduct(models.Model):
                 ], limit=limit)
                 return product_codes.product.name_get()
         return res
+
+    @api.multi
+    def name_get(self):
+        res = super(ProductProduct, self).name_get()
+        partner_id = self._context.get('partner_id')
+        if partner_id:
+            product_customer_code_obj = self.env['product.customer.code']
+            for product in self:
+                product_code = product_customer_code_obj.search([
+                    ('product', '=', product.id),
+                    ('partner', '=', partner_id)
+                ], limit=1)
+                if product_code:
+                    # convert tuple to list
+                    lst = list(res[0])
+                    # change value in the list
+                    lst[1] = res[0][1].__add__(' (').__add__(
+                        product_code.product_code).__add__(')')
+                    # convert list to tuple
+                    res[0] = tuple(lst)
+        return res
