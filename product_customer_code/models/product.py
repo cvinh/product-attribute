@@ -34,5 +34,5 @@ class ProductProduct(models.Model):
                     ('product_code', '=', name),
                     ('partner', '=', partner_id)
                 ], limit=limit)
-                return product_codes.name_get()
+                return product_codes.product.name_get()
         return res
